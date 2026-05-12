@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Caseback</title>
+
+  <!-- Söhne Buch -->
+  <!-- Replace this with your actual hosted Söhne font files -->
+  <style>
+    @font-face {
+      font-family: "Sohne";
+      src: url("./fonts/Söhne-Buch.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #101011;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .logo-image {
+    width: 160px;
+    height: auto;
+    display: block;
+    margin: 15px auto; 
+    }
+    
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .brand {
+      position: absolute;
+      top: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      text-align: center;
+      color: white;
+    }
+
+    .logo {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .meta {
+      margin-top: 6px;
+      font-size: 9px;
+      line-height: 1.2;
+      letter-spacing: 1px;
+      opacity: 0.95;
+      font-family: "Sohne", sans-serif;
+      text-transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero-image {
+        object-position: 38% center;
+      }
+
+      .brand {
+        top: 22px;
+      }
+
+      .logo {
+        font-size: 15px;
+      }
+
+      .meta {
+        font-size: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <img class="hero-image" src="caseback-background.png" alt="Caseback" />
+    <div class="overlay"></div>
+
+    <section class="brand">
+      <img class="logo-image" src="./caseback-logo.svg" alt="Caseback" />
+      <div class="meta" id="datetime"></div>
+    </section>
+  </main>
+
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+
+      const formatter = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Los_Angeles",
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+      });
+
+      const parts = formatter.formatToParts(now);
+
+      const get = (type) =>
+        parts.find((p) => p.type === type)?.value || "";
+
+      const weekday = get("weekday");
+      const month = get("month");
+      const day = get("day");
+      const year = get("year");
+      const hour = get("hour");
+      const minute = get("minute");
+      const dayPeriod = get("dayPeriod");
+
+      const formatted = `${weekday}, ${month} ${day}, ${year} ${hour}:${minute}${dayPeriod} PT`;
+
+      document.getElementById("datetime").textContent = formatted;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  </script>
+</body>
+</html>
