@@ -4,9 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Caseback</title>
-  <link rel="icon" type="image/png" href="/caseback-favicon.png" />
-<link rel="shortcut icon" href="/caseback-favicon.png" />
-<link rel="apple-touch-icon" href="/caseback-favicon.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
 
   <!-- Söhne Buch -->
   <!-- Replace this with your actual hosted Söhne font files -->
@@ -39,7 +37,7 @@
     }
 
     .logo-image {
-    width: 160px;
+    width: 250px;
     height: auto;
     display: block;
     margin: 15px auto; 
@@ -57,7 +55,7 @@
     .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.03);
+      background: rgba(0, 0, 0, 0.3);
     }
 
     .brand {
@@ -99,13 +97,23 @@
         top: 22px;
       }
 
-      .logo {
-        font-size: 15px;
+      .logo-image {
+      width: 90vw;
       }
 
       .meta {
         font-size: 8px;
       }
+
+      .brand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  color: white;
+}
     }
   </style>
 </head>
